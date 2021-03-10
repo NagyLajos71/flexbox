@@ -1,38 +1,207 @@
-.App {
+/*GENERAL, CSS VARIABLES*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   text-align: center;
+  list-style-type: none;
+  --clr-base1: #ffa946;
+  --clr-base2: #ff9b46;
+  --clr-base3: #ff8b46;
+  --clr-paint1: #ffffff;
+  --clr-paint2: #f5cd9e;
+  --clr-paint3: hsl(32, 70%, 52%);
+  --clr-paint4: hsl(34, 75%, 25%);
+  --clr-paint5: #271b0c;
+  --text-shadow: 1px 2px var(--clr-paint1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* HTML ELEMENTS GENERAL SETTINGS */
+span {
+  font-style: oblique;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h3,h4,p,div {
+  user-select: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* MAIN LAYOUT*/
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  background-color: var(--clr-base1);
+}
+.settingsSide {
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: repeat(1fr, 3);
+}
+.demoSide {
+  grid-column: 2;
+  background-color: var(--clr-paint2);
+  background-image: linear-gradient(
+    to left,
+    var(--clr-paint1),
+    var(--clr-paint2) 10%
+  );
+  display: flex;
+  overflow: hidden;
+  padding-left: 2vw;
+  display: flex;
+}
+.demoScreen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.panel {
+  display: grid;
+  grid-template-columns: 50px repeat(2, 1fr);
+}
+.itemsPanel {
+  background-image: linear-gradient(
+    to right,
+    var(--clr-paint1),
+    var(--clr-base1) 20%
+  );
+}
+
+/* INSIDE THE SETTINGS PANELS */
+.parentSettingsPanel {
+  background-image: linear-gradient(
+    to right,
+    var(--clr-paint1),
+    var(--clr-base2) 20%
+  );
+}
+.itemSettingsPanel {
+  background-image: linear-gradient(
+    to right,
+    var(--clr-paint1),
+    var(--clr-base3) 20%
+  );
+}
+.panelColumn {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+}
+.panelTitle {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.7;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+}
+.referenceLetter {
+  --size: 2.5vw;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid var(--clr-paint5);
+  border-radius: 5px;
+  color: var(--clr-paint2);
+  text-shadow: var(--text-shadow);
+  font-weight: 700;
+  font-size: var(--size);
+  text-align: center;
+  line-height: var(--size);
+  margin-bottom: 1vw;
+  /* visibility: hidden; */
 }
 
-.App-link {
-  color: #61dafb;
+/* BUTTONS */
+.btn {
+  width: 50%;
+  height: 30px;
+  margin: 9px;
+  border-radius: 3px;
+  border: 1px solid var(--clr-paint4);
+  background-color: transparent;
+  font-size: 16px;
+  color: var(--clr-paint5);
+  text-align: center;
+  transition: all 500ms ease;
+}
+.btn:hover {
+  color: var(--clr-paint1);
+  border: 1px solid var(--clr-paint2);
+  transform: scale(1.05);
+}
+.btn:focus {
+  outline: none;
+}
+.btnPlusMinus {
+  font-size: 150%;
+  width: 30%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* DROPDOWNS */
+select {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--clr-paint4);
+  transition: all 500ms ease;
+}
+select:hover {
+  border: 1px solid var(--clr-paint2);
+}
+select:focus {
+  outline: none;
+}
+
+/* ACTIONBOXES */
+.actionBox, .flippingCard {
+  margin: 3px;
+  border-radius: 7%;
+  box-shadow: 5px 10px rgba(25, 25, 112, 0.562);
+  font-weight: 700;
+  font-size: 10vmin;
+  color: var(--clr-paint2);
+  text-align: center;
+  text-shadow: var(--text-shadow);
+  width: auto;
+}
+.flippingCard{
+  background-color: var(--clr-paint4);
+}
+.actionBox:nth-of-type(3n + 0) {
+  background-color: var(--clr-paint5);
+  border: 2px solid var(--clr-paint4);
+  border-bottom: 4px solid var(--clr-paint4);
+}
+.actionBox:nth-of-type(3n + 1) {
+  background-color: var(--clr-paint3);
+  border: 2px solid var(--clr-paint4);
+  border-bottom: 4px solid var(--clr-paint4);
+}
+.actionBox:nth-of-type(3n + 2) {
+  background-color: var(--clr-paint4);
+  border: 2px solid var(--clr-paint4);
+  border-bottom: 4px solid var(--clr-paint4);
+}
+
+/* FLIPPING CARD EFFECT */
+.frontFace,
+.backFace {
+  backface-visibility: hidden;
+  transition: transform 600ms linear;
+  position: absolute;
+}
+.frontFace {
+  transform: perspective(600px) rotateY(0turn);
+}
+.rotateFrontFace {
+  transform: perspective(600px) rotateY(-0.5turn);
+}
+.backFace {
+  transform: perspective(600px) rotateY(0.5turn);
+}
+.rotateBackFace {
+  transform: perspective(600px) rotateY(0turn);
 }
